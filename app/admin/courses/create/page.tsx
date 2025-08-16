@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import slugify from 'slugify'
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tiptap } from "@/components/rich-text-editor/Editor";
 
 export default function CourseCreationPage() {
 
@@ -117,7 +118,8 @@ export default function CourseCreationPage() {
                                     <FormItem>
                                         <FormLabel>Description</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Description" {...field} className="min-h-[120px]" />
+                                            {/* <Textarea placeholder="Description" {...field} className="min-h-[120px]" /> */}
+                                            <Tiptap field={field}/>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -246,7 +248,7 @@ export default function CourseCreationPage() {
                             />
 
                             <Button>
-                                Create Course <PlusIcon className="ml-1" size={16}/>
+                                Create Course <PlusIcon className="ml-1" size={16} />
                             </Button>
 
                         </form>
