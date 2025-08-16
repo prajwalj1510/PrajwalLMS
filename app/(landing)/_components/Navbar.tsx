@@ -44,7 +44,14 @@ export const Navbar = () => {
                         <ModeToggle />
 
                         {isPending ? null : session ? (
-                            <UserDropdown email={session.user.email} name={session.user.name} image={session.user.image!}/>
+                            <UserDropdown
+                                email={session.user.email}
+                                name={session?.user.name && session.user.name.length > 0
+                                    ? session.user.name
+                                    : session?.user.email.split('@')[0]
+                                }
+                                image={session?.user.image ?? `https://avatar.vercel.sh/${session?.user.email}`}
+                            />
                         ) : (
                             <>
                                 <Link href={`/login`} className={buttonVariants({ variant: 'secondary' })}>
