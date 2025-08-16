@@ -12,6 +12,7 @@ import slugify from 'slugify'
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tiptap } from "@/components/rich-text-editor/Editor";
+import { Uploader } from "@/components/file-uploader/Uploader";
 
 export default function CourseCreationPage() {
 
@@ -133,7 +134,8 @@ export default function CourseCreationPage() {
                                     <FormItem>
                                         <FormLabel>Thumbnail Image</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="thumbnail url" {...field} />
+                                            {/* <Input placeholder="thumbnail url" {...field} /> */}
+                                            <Uploader />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
