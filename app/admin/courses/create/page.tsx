@@ -135,7 +135,7 @@ export default function CourseCreationPage() {
                                         <FormLabel>Thumbnail Image</FormLabel>
                                         <FormControl>
                                             {/* <Input placeholder="thumbnail url" {...field} /> */}
-                                            <Uploader />
+                                            <Uploader onChange={field.onChange} value={field.value}/>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
