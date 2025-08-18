@@ -31,7 +31,7 @@ export const Uploader = () => {
         fileType: 'image',
     })
 
-    const uploadFile = (file: File) => {
+    const uploadFile = async (file: File) => {
         setFileState((prev) => ({
             ...prev,
             uploading: true,
@@ -39,9 +39,85 @@ export const Uploader = () => {
         }))
 
         try {
-            
-        } catch  {
-            
+
+            //1. Get Presigned Url
+            const presignedResponse = await fetch('/api/s3/upload', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    fileName: file.name,
+                    contentType: file.type,
+                    size: file.size,
+                    isImage: true,
+                })
+            })
+
+            if (!presignedResponse.ok) {
+                toast.error('Failed to get presigned URL')
+                setFileState((prev) => ({
+                    ...prev,
+                    uploading: false,
+                    progress: 0,
+                    error: true,
+                }))
+                return;
+            }
+
+            const { presignedUrl, key } = await presignedResponse.json()
+
+            await new Promise<void>((resolve, reject) => {
+                const xhr = new XMLHttpRequest()
+
+                xhr.upload.onprogress = (event) => {
+                    if (event.lengthComputable) {
+                        const percentageCompleted = (event.loaded / event.total) * 100
+                        setFileState((prev) => ({
+                            ...prev,
+                            progress: Math.round(percentageCompleted)
+                        }))
+
+                    }
+                }
+
+                xhr.onload = () => {
+                    if (xhr.status === 200 || xhr.status === 204) {
+                        setFileState((prev) => ({
+                            ...prev,
+                            progress: 100,
+                            uploading: false,
+                            key: key,
+                        }))
+
+                        toast.success('File uploaded successfully')
+                        resolve()
+                    } else {
+                        reject(new Error('Upload failed...'))
+                    }
+                }
+
+                xhr.onerror = () => {
+                    reject(new Error('Upload failed'))
+                }
+
+                console.log(presignedUrl);
+                
+
+                xhr.open("PUT", presignedUrl)
+                console.log(file);
+                
+                xhr.setRequestHeader("Content-Type", file.type)
+                xhr.send(file)
+            })
+
+        } catch {
+            toast.error('Something went wrong')
+            setFileState((prev) => ({
+                ...prev,
+                progress: 0,
+                error: true,
+                uploading: false,
+            }))
+
         }
     }
 
@@ -62,6 +138,8 @@ export const Uploader = () => {
                 isDeleting: false,
                 fileType: 'image',
             })
+
+            uploadFile(file)
         }
 
     }, [])
@@ -83,12 +161,32 @@ export const Uploader = () => {
         }
     }
 
+    function renderContent() {
+        if (fileState.uploading) {
+            return (
+                <h1>Uploading...</h1>
+            )
+        }
+
+        if (fileState.error) {
+            return <RenderErrorState />
+        }
+
+        if (fileState.objectUrl) {
+            return (
+                <h1>Uploaded file</h1>
+            )
+        }
+
+        return <RenderEmptyState isDragActive={isDragActive} />
+    }
+
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         accept: { 'image/*': [] },
         maxFiles: 1,
         multiple: false,
-        maxSize: 5 * 1024 * 1024, // 5mb
+        maxSize: 1 * 1024 * 1024, // 5mb
         onDropRejected: rejectedFiles,
     })
 
@@ -105,7 +203,9 @@ export const Uploader = () => {
                         <p>Drag 'n' drop some files here, or click to select files</p>
                 } */}
 
-                <RenderEmptyState isDragActive={isDragActive} />
+                {/* <RenderEmptyState isDragActive={isDragActive} /> */}
+
+                {renderContent()}
             </CardContent>
         </Card>
     )
