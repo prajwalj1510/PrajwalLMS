@@ -15,6 +15,10 @@ import { ChevronDown, ChevronRight, ChevronUp, FileTextIcon, GripVertical, Trash
 import Link from "next/link"
 import { toast } from "sonner"
 import { reorderChapters, reorderLessons } from "../actions"
+import { NewChapterModal } from "./NewChapterModal"
+import { NewLessonModal } from "./NewLessonModal"
+import { DeleteLesson } from "./DeleteLesson"
+import { DeleteChapter } from "./DeleteChapter"
 
 interface CourseStructureProps {
     data: AdminCourseSingularType
@@ -272,6 +276,7 @@ export const CourseStructure = ({ data }: CourseStructureProps) => {
                     <CardTitle>
                         Chapters
                     </CardTitle>
+                    <NewChapterModal courseId={data.id}/>
                 </CardHeader>
 
                 <CardContent className="space-y-8">
@@ -298,9 +303,10 @@ export const CourseStructure = ({ data }: CourseStructureProps) => {
                                                         </CollapsibleTrigger>
                                                         <p className="cursor-pointer hover:text-primary pl-2">{item.title}</p>
                                                     </div>
-                                                    <Button size='icon' variant='ghost'>
+                                                    {/* <Button size='icon' variant='ghost'>
                                                         <Trash2 className="size-4" />
-                                                    </Button>
+                                                    </Button> */}
+                                                    <DeleteChapter chapterId={item.id} courseId={data.id}/>
                                                 </div>
 
                                                 <CollapsibleContent>
@@ -323,18 +329,18 @@ export const CourseStructure = ({ data }: CourseStructureProps) => {
                                                                                     {lesson.title}
                                                                                 </Link>
                                                                             </div>
-                                                                            <Button variant='outline' size='icon'>
+                                                                            {/* <Button variant='outline' size='icon'>
                                                                                 <Trash2 className="size-4" />
-                                                                            </Button>
+                                                                            </Button> */}
+
+                                                                            <DeleteLesson chapterId={item.id} courseId={data.id} lessonId={lesson.id} />
                                                                         </div>
                                                                     )}
                                                                 </SortableItem>
                                                             ))}
                                                         </SortableContext>
                                                         <div className="p-2">
-                                                            <Button variant='outline' className="w-full">
-                                                                Create New Lesson
-                                                            </Button>
+                                                            <NewLessonModal chapterId={item.id} courseId={data.id} />
                                                         </div>
                                                     </div>
                                                 </CollapsibleContent>
