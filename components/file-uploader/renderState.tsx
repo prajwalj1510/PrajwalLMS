@@ -45,20 +45,31 @@ export const RenderErrorState = () => {
     )
 }
 
-export const RenderUploadedState = ({ 
-    previewUrl, 
-    isDeleting, 
-    handleRemoveFile 
-}: { previewUrl: string, isDeleting: boolean, handleRemoveFile: () => void }) => {
+export const RenderUploadedState = ({
+    previewUrl,
+    isDeleting,
+    handleRemoveFile,
+    fileType,
+}: { previewUrl: string, isDeleting: boolean, handleRemoveFile: () => void, fileType: 'image' | 'video' }) => {
     return (
-        <div>
-            <Image 
-                src={previewUrl}
-                alt="uploaded file"
-                fill
-                className="object-contain p-2"
-            />
-            <Button 
+        <div className="relative group w-full h-full flex items-center justify-center">
+
+            {fileType === 'video' ? (
+                <video
+                    src={previewUrl}
+                    controls
+                    className="rounded-md w-full h-full"
+                />
+            ) : (
+                <Image
+                    src={previewUrl}
+                    alt="uploaded file"
+                    fill
+                    className="object-contain p-2"
+                />
+            )}
+
+            <Button
                 variant='destructive'
                 size='icon'
                 className={cn(
@@ -69,21 +80,21 @@ export const RenderUploadedState = ({
                 disabled={isDeleting}
             >
                 {isDeleting ? (
-                    <Loader2 className="size-4 animate-spin"/>
+                    <Loader2 className="size-4 animate-spin" />
                 ) : (
-                    <XIcon className="size-4"/>
+                    <XIcon className="size-4" />
                 )}
             </Button>
         </div>
     )
 }
 
-export const RenderUploadingState = ({progress, file} : {progress: number, file: File}) => {
+export const RenderUploadingState = ({ progress, file }: { progress: number, file: File }) => {
     return (
         <div className="text-center flex justify-center items-center flex-col">
-            
+
             <p>{progress}</p>
-            
+
             <p className="mt-2 text-sm font-medium text-foreground">Uploading...</p>
 
             <p className="mt-1 text-xs text-muted-foreground truncate max-w-xs">
