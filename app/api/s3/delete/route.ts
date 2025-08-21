@@ -8,12 +8,20 @@ import { error } from "console";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
+// const aj = arcjet.withRule(
+//     detectBot({
+//         mode: 'LIVE',
+//         allow: [],
+//     })
+// ).withRule(
+//     fixedWindow({
+//         mode: 'LIVE',
+//         window: '1m',
+//         max: 5,
+//     })
+// )
+
 const aj = arcjet.withRule(
-    detectBot({
-        mode: 'LIVE',
-        allow: [],
-    })
-).withRule(
     fixedWindow({
         mode: 'LIVE',
         window: '1m',

@@ -8,12 +8,20 @@ import { chapterSchema, ChapterSchemaType, courseSchema, CourseSchemaType, lesso
 import { request } from "@arcjet/next"
 import { revalidatePath } from "next/cache"
 
+// const aj = arcjet.withRule(
+//     detectBot({
+//         mode: 'LIVE',
+//         allow: [],
+//     })
+// ).withRule(
+//     fixedWindow({
+//         mode: 'LIVE',
+//         window: '1m',
+//         max: 5,
+//     })
+// )
+
 const aj = arcjet.withRule(
-    detectBot({
-        mode: 'LIVE',
-        allow: [],
-    })
-).withRule(
     fixedWindow({
         mode: 'LIVE',
         window: '1m',
