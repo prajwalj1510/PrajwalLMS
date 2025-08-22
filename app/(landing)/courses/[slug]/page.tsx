@@ -9,6 +9,10 @@ import { useConstructUrl } from "@/hooks/use-construct-url";
 import { IconBook, IconCategory, IconChartBar, IconClock, IconPlayerPlay } from "@tabler/icons-react";
 import { CheckIcon, ChevronDown } from "lucide-react";
 import Image from "next/image";
+import { EnrollInCourseAction } from "./actions";
+import { CheckIfCourseBought } from "@/app/data/user/user-is-enrolled";
+import Link from "next/link";
+import { EnrollmentButton } from "./_components/EnrollmentButton";
 
 type Params = Promise<{
     slug: string,
@@ -21,6 +25,8 @@ export default async function SlugPage({ params }: { params: Params }) {
     const course = await GetIndividualCourse(slug);
 
     const thumbnailUrl = useConstructUrl(course.fileKey)
+
+    const isEnrolled = await CheckIfCourseBought(course.id)
 
     return (
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 mt-5">
@@ -234,24 +240,24 @@ export default async function SlugPage({ params }: { params: Params }) {
                                 </h4>
                                 <ul className="space-y-2">
                                     <li className="flex items-center gap-2 text-sm">
-                                        <div className="rounded-full p-1 bg-green-500/10 text-green-500"> 
-                                            <CheckIcon className="size-3"/>
+                                        <div className="rounded-full p-1 bg-green-500/10 text-green-500">
+                                            <CheckIcon className="size-3" />
                                         </div>
                                         <span>
                                             Full Lifetime access
                                         </span>
                                     </li>
                                     <li className="flex items-center gap-2 text-sm">
-                                        <div className="rounded-full p-1 bg-green-500/10 text-green-500"> 
-                                            <CheckIcon className="size-3"/>
+                                        <div className="rounded-full p-1 bg-green-500/10 text-green-500">
+                                            <CheckIcon className="size-3" />
                                         </div>
                                         <span>
                                             Access on mobile & desktop
                                         </span>
                                     </li>
                                     <li className="flex items-center gap-2 text-sm">
-                                        <div className="rounded-full p-1 bg-green-500/10 text-green-500"> 
-                                            <CheckIcon className="size-3"/>
+                                        <div className="rounded-full p-1 bg-green-500/10 text-green-500">
+                                            <CheckIcon className="size-3" />
                                         </div>
                                         <span>
                                             Certification of Completion
@@ -260,9 +266,14 @@ export default async function SlugPage({ params }: { params: Params }) {
                                 </ul>
                             </div>
 
-                            <Button className="w-full">
-                                Enroll Now!
-                            </Button>
+                            {isEnrolled ? (
+                                <Link href={`/dashboard`}>
+                                    Watch Course
+                                </Link>
+                            ) : (
+                                <EnrollmentButton courseId={course.id}/>
+                            )}
+
                             <p className="mt-3 text-center text-xs text-muted-foreground">30-day money-back guarantee</p>
                         </CardContent>
                     </Card>
