@@ -9,6 +9,7 @@ import parse from 'html-react-parser'
 
 export const RenderDescription = ({ json }: { json: JSONContent }) => {
     const output = useMemo(() => {
+        if(typeof window === 'undefined') return ''
         return generateHTML(json, [
             StarterKit,
             TextAlign.configure({
