@@ -4,6 +4,7 @@ import { requireAdmin } from "@/app/data/admin/require-admin";
 import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { stripe } from "@/lib/stripe";
 import { ApiResponse } from "@/lib/types";
 import { courseSchema, CourseSchemaType } from "@/lib/zodSchema";
 import { request } from "@arcjet/next";
@@ -40,15 +41,15 @@ export const CreateCourse = async (values: CourseSchemaType): Promise<ApiRespons
             fingerprint: session.user.id,
         })
 
-        if(decision.isDenied()) {
+        if (decision.isDenied()) {
             // return {
             //     status: 'error',
             //     message: 'Looks like you are a malicious user'
             // }
 
-            if(decision.reason.isRateLimit()) {
+            if (decision.reason.isRateLimit()) {
                 return {
-                    status:'error',
+                    status: 'error',
                     message: 'You have been blocked due to rate limiting',
                 }
             } else {
@@ -68,10 +69,20 @@ export const CreateCourse = async (values: CourseSchemaType): Promise<ApiRespons
             }
         }
 
+        const stripeData = await stripe.products.create({
+            name: validation.data.title,
+            description: validation.data.smallDescription,
+            default_price_data: {
+                currency: 'inr',
+                unit_amount: validation.data.price * 100,
+            }
+        })
+
         const data = await prisma.course.create({
             data: {
                 ...validation.data,
                 userId: session?.user.id as string,
+                stripePriceId: stripeData.default_price as string,
             }
         })
 

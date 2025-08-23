@@ -1,4 +1,4 @@
-import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react"
+import { IconBook, IconPlaylistX, IconShoppingCart, IconTrendingDown, IconTrendingUp, IconUsers } from "@tabler/icons-react"
 
 import { Badge } from "@/components/ui/badge"
 import {
@@ -9,33 +9,96 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { AdminGetDashboardStats } from "@/app/data/admin/admin-get-dashboard-stats"
 
-export function SectionCards() {
+export async function SectionCards() {
+
+  const {totalSignups, totalCustomers, totalCourses, totalLessons} = await AdminGetDashboardStats()
+
   return (
-    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Total Revenue</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            $1,250.00
-          </CardTitle>
-          <CardAction>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <div>
+            <CardDescription>Total Signups</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {totalSignups}+
+            </CardTitle>
+            {/* <CardAction>
             <Badge variant="outline">
               <IconTrendingUp />
               +12.5%
             </Badge>
-          </CardAction>
+          </CardAction> */}
+          </div>
+          <IconUsers className="size-6 text-muted-foreground"/>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
+          {/* <div className="line-clamp-1 flex gap-2 font-medium">
             Trending up this month <IconTrendingUp className="size-4" />
           </div>
           <div className="text-muted-foreground">
             Visitors for the last 6 months
-          </div>
+          </div> */}
+          <p className="text-muted-foreground">
+            Registered users on the platform
+          </p>
         </CardFooter>
       </Card>
+
       <Card className="@container/card">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <div>
+            <CardDescription>Total Customers</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {totalCustomers}+
+            </CardTitle>
+          </div>
+          <IconShoppingCart className="size-6 text-muted-foreground"/>
+        </CardHeader>
+        <CardFooter className="flex-col items-start gap-1.5 text-sm">
+          <p className="text-muted-foreground">
+            Users who have enrolled in courses
+          </p>
+        </CardFooter>
+      </Card>
+
+      <Card className="@container/card">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <div>
+            <CardDescription>Total Courses</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {totalCourses}+
+            </CardTitle>
+          </div>
+          <IconBook className="size-6 text-muted-foreground"/>
+        </CardHeader>
+        <CardFooter className="flex-col items-start gap-1.5 text-sm">
+          <p className="text-muted-foreground">
+            Available Courses on the platform
+          </p>
+        </CardFooter>
+      </Card>
+
+      <Card className="@container/card">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <div>
+            <CardDescription>Total Lessons</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {totalLessons}+
+            </CardTitle>
+          </div>
+          <IconPlaylistX className="size-6 text-muted-foreground" />
+        </CardHeader>
+        <CardFooter className="flex-col items-start gap-1.5 text-sm">
+          <p className="text-muted-foreground">
+            Total learning content available
+          </p>
+        </CardFooter>
+      </Card>
+
+
+      {/* <Card className="@container/card">
         <CardHeader>
           <CardDescription>New Customers</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
@@ -96,7 +159,7 @@ export function SectionCards() {
           </div>
           <div className="text-muted-foreground">Meets growth projections</div>
         </CardFooter>
-      </Card>
+      </Card> */}
     </div>
   )
 }
