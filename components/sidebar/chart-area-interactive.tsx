@@ -1,12 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
-import { useIsMobile } from "@/hooks/use-mobile"
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -20,41 +18,6 @@ import {
 } from "@/components/ui/chart"
 
 export const description = "An interactive area chart"
-
-const chartData = [
-  {
-    date: '2025-08-23',
-    enrollments: 12,
-  },
-  {
-    date: '2025-08-22',
-    enrollments: 10,
-  },
-  {
-    date: '2025-08-21',
-    enrollments: 20,
-  },
-  {
-    date: '2025-08-20',
-    enrollments: 5,
-  },
-  {
-    date: '2025-08-10',
-    enrollments: 9,
-  },
-  {
-    date: '2025-08-19',
-    enrollments: 22,
-  },
-  {
-    date: '2025-08-15',
-    enrollments: 3,
-  },
-  {
-    date: '2025-08-18',
-    enrollments: 1,
-  }
-]
 
 const chartConfig = {
   enrollments: {
@@ -70,7 +33,7 @@ interface ChartAreaInteractiveProps {
 export function ChartAreaInteractive({ data }: ChartAreaInteractiveProps) {
 
   const totalEnrollmentsNumber = React.useMemo(
-    () => data.reduce((acc, curr) => acc+curr.enrollments,0), [data]
+    () => data.reduce((acc, curr) => acc + curr.enrollments, 0), [data]
   )
 
   return (

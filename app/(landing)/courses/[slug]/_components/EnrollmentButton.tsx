@@ -5,7 +5,7 @@ import { tryCatch } from "@/hooks/try-catch";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { EnrollInCourseAction } from "../actions";
-import { Loader, Loader2 } from "lucide-react";
+import { Loader } from "lucide-react";
 
 export const EnrollmentButton = ({ courseId }: { courseId: string }) => {
 
@@ -32,7 +32,7 @@ export const EnrollmentButton = ({ courseId }: { courseId: string }) => {
         <Button className="w-full" onClick={onSubmit} disabled={isPending}>
             {isPending ? (
                 <>
-                    <Loader className="size-4 animate-spin"/>
+                    <Loader className="size-4 animate-spin" />
                     Loading...
                 </>
             ) : (

@@ -34,7 +34,7 @@ export const MarkLessonComplete = async (lessonId: string, slug: string): Promis
             message: 'Progress updated'
         }
 
-    } catch (error) {
+    } catch {
         return {
             status: 'error',
             message: 'Failed to mark lesson as complete'

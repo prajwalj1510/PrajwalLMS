@@ -31,7 +31,7 @@ export const CourseContent = ({ data }: CourseContentProps) => {
         if (!videoKey) {
             return (<div className="aspect-video bg-muted rounded-lg flex flex-col items-center justify-center">
                 <BookIcon className="size-16 text-primary mx-auto mb-4" />
-                <p className="text-muted-foreground">This lesson doesn't have video yet!</p>
+                <p className="text-muted-foreground">This lesson doesn `&apos;` t have video yet!</p>
             </div>)
         }
 

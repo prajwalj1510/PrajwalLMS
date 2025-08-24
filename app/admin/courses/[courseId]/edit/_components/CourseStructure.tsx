@@ -11,7 +11,7 @@ import { AdminCourseSingularType } from "@/app/data/admin/admin-get-course"
 import { cn } from "@/lib/utils"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, ChevronRight, ChevronUp, FileTextIcon, GripVertical, Trash2 } from "lucide-react"
+import { ChevronDown, ChevronRight, FileTextIcon, GripVertical } from "lucide-react"
 import Link from "next/link"
 import { toast } from "sonner"
 import { reorderChapters, reorderLessons } from "../actions"
@@ -65,7 +65,7 @@ export const CourseStructure = ({ data }: CourseStructureProps) => {
                     title: lesson.title,
                     order: lesson.position,
                 })),
-            })) || [] ;
+            })) || [];
 
             return updatedItems
         })
@@ -276,7 +276,7 @@ export const CourseStructure = ({ data }: CourseStructureProps) => {
                     <CardTitle>
                         Chapters
                     </CardTitle>
-                    <NewChapterModal courseId={data.id}/>
+                    <NewChapterModal courseId={data.id} />
                 </CardHeader>
 
                 <CardContent className="space-y-8">
@@ -306,7 +306,7 @@ export const CourseStructure = ({ data }: CourseStructureProps) => {
                                                     {/* <Button size='icon' variant='ghost'>
                                                         <Trash2 className="size-4" />
                                                     </Button> */}
-                                                    <DeleteChapter chapterId={item.id} courseId={data.id}/>
+                                                    <DeleteChapter chapterId={item.id} courseId={data.id} />
                                                 </div>
 
                                                 <CollapsibleContent>

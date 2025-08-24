@@ -1,9 +1,7 @@
-import { IconBook, IconPlaylistX, IconShoppingCart, IconTrendingDown, IconTrendingUp, IconUsers } from "@tabler/icons-react"
+import { IconBook, IconPlaylistX, IconShoppingCart, IconUsers } from "@tabler/icons-react"
 
-import { Badge } from "@/components/ui/badge"
 import {
   Card,
-  CardAction,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -13,7 +11,7 @@ import { AdminGetDashboardStats } from "@/app/data/admin/admin-get-dashboard-sta
 
 export async function SectionCards() {
 
-  const {totalSignups, totalCustomers, totalCourses, totalLessons} = await AdminGetDashboardStats()
+  const { totalSignups, totalCustomers, totalCourses, totalLessons } = await AdminGetDashboardStats()
 
   return (
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
@@ -31,7 +29,7 @@ export async function SectionCards() {
             </Badge>
           </CardAction> */}
           </div>
-          <IconUsers className="size-6 text-muted-foreground"/>
+          <IconUsers className="size-6 text-muted-foreground" />
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           {/* <div className="line-clamp-1 flex gap-2 font-medium">
@@ -54,7 +52,7 @@ export async function SectionCards() {
               {totalCustomers}+
             </CardTitle>
           </div>
-          <IconShoppingCart className="size-6 text-muted-foreground"/>
+          <IconShoppingCart className="size-6 text-muted-foreground" />
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <p className="text-muted-foreground">
@@ -71,7 +69,7 @@ export async function SectionCards() {
               {totalCourses}+
             </CardTitle>
           </div>
-          <IconBook className="size-6 text-muted-foreground"/>
+          <IconBook className="size-6 text-muted-foreground" />
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <p className="text-muted-foreground">

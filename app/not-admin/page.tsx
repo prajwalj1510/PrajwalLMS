@@ -16,7 +16,7 @@ const NotAdminRoute = () => {
                     Access Restricted
                 </CardTitle>
                 <CardDescription className="max-w-xs mx-auto text-muted-foreground">
-                    Hey! You are not an admin, which means you can't create any courses or stuff like that...
+                    Hey! You are not an admin, which means you can `&apos;`t create any courses or stuff like that...
                 </CardDescription>
             </CardHeader>
             <CardContent>

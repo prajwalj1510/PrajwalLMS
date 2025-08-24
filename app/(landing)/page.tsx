@@ -1,12 +1,7 @@
-// "use client"
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ModeToggle } from "@/components/ui/themeToggle";
-import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 interface featuresProps {
     title: string,
@@ -14,7 +9,7 @@ interface featuresProps {
     icon: string,
 }
 
-const features : featuresProps[] = [
+const features: featuresProps[] = [
     {
         title: 'Comprehensive Courses',
         description: 'Access a wide range of carefully curated courses designed by industry experts.',
@@ -26,8 +21,8 @@ const features : featuresProps[] = [
         icon: '🎮'
     },
     {
-        title:'Progress Tracking',
-        description:'Moinitor your progress and achievements with detailed analytics and personalized dashboards.',
+        title: 'Progress Tracking',
+        description: 'Moinitor your progress and achievements with detailed analytics and personalized dashboards.',
         icon: '📊'
     },
     {
@@ -74,11 +69,11 @@ export default function Home() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                        <Link className={buttonVariants({size: 'lg'})} href='/courses'>
+                        <Link className={buttonVariants({ size: 'lg' })} href='/courses'>
                             Explore courses
                         </Link>
 
-                        <Link className={buttonVariants({size: 'lg', variant: 'secondary'})} href='/login'>
+                        <Link className={buttonVariants({ size: 'lg', variant: 'secondary' })} href='/login'>
                             Sign in
                         </Link>
                     </div>
@@ -102,7 +97,7 @@ export default function Home() {
                         </CardContent>
 
                     </Card>
-                ) )}
+                ))}
             </section>
         </>
     )

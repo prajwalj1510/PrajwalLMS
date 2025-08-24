@@ -1,7 +1,7 @@
 import { GetIndividualCourse } from "@/app/data/course/get-course";
 import { RenderDescription } from "@/components/rich-text-editor/RenderDescription";
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
@@ -9,10 +9,10 @@ import { useConstructUrl } from "@/hooks/use-construct-url";
 import { IconBook, IconCategory, IconChartBar, IconClock, IconPlayerPlay } from "@tabler/icons-react";
 import { CheckIcon, ChevronDown } from "lucide-react";
 import Image from "next/image";
-import { EnrollInCourseAction } from "./actions";
 import { CheckIfCourseBought } from "@/app/data/user/user-is-enrolled";
 import Link from "next/link";
 import { EnrollmentButton } from "./_components/EnrollmentButton";
+import { env } from "@/lib/env";
 
 type Params = Promise<{
     slug: string,
@@ -24,7 +24,7 @@ export default async function SlugPage({ params }: { params: Params }) {
 
     const course = await GetIndividualCourse(slug);
 
-    const thumbnailUrl = useConstructUrl(course.fileKey)
+    // const thumbnailUrl = useConstructUrl(course.fileKey)
 
     const isEnrolled = await CheckIfCourseBought(course.id)
 
@@ -33,7 +33,7 @@ export default async function SlugPage({ params }: { params: Params }) {
             <div className="order-1 lg:col-span-2">
                 <div className="relative aspect-video w-full overflow-hidden rounded-xl shadow-lg">
                     <Image
-                        src={thumbnailUrl}
+                        src={`https://${env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES}.t3.storageapi.dev/${course.fileKey}`}
                         alt="thumbnail Image"
                         fill
                         className="object-cover"

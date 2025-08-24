@@ -27,7 +27,7 @@ export const LoginForm = () => {
                     onSuccess: () => {
                         toast.success('Signed in with Github, you will be redirected...')
                     },
-                    onError: (error) => {
+                    onError: () => {
                         toast.error('internal server error')
                     }
                 }
