@@ -1,8 +1,7 @@
 "use client"
 
-import { IconCirclePlusFilled, IconMail, type Icon } from "@tabler/icons-react"
+import { IconCirclePlusFilled, type Icon } from "@tabler/icons-react"
 
-import { Button } from "@/components/ui/button"
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -62,7 +61,7 @@ export function NavMain({
                 )}>
                   {item.icon && <item.icon className={cn(
                     pathname === item.url && 'text-primary'
-                  )}/>}
+                  )} />}
                   <span>{item.title}</span>
                 </Link>
               </SidebarMenuButton>

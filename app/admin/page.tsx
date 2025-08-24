@@ -61,7 +61,7 @@ async function RenderRecentCourses() {
   )
 }
 
-export const RenderRecentCoursesSkeletonLayout = () => {
+const RenderRecentCoursesSkeletonLayout = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {Array.from({length: 5}).map((_, index) => (

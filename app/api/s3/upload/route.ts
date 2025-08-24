@@ -5,12 +5,10 @@ import { env } from "@/lib/env"
 import { v4 as uuidv4 } from 'uuid';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { S3 } from "@/lib/S3Client"
-import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { requireAdmin } from "@/app/data/admin/require-admin";
 
-export const fileUploadSchema = z.object({
+const fileUploadSchema = z.object({
     fileName: z.string().min(1, { message: 'Filename is required' }),
     contentType: z.string().min(1, { message: 'Content type is required' }),
     size: z.number().min(1, { message: 'Size is required' }),
@@ -32,7 +30,7 @@ export const fileUploadSchema = z.object({
 
 const aj = arcjet.withRule(
     fixedWindow({
-        mode:'LIVE',
+        mode: 'LIVE',
         window: '1m',
         max: 5,
     })
@@ -48,10 +46,10 @@ export async function POST(request: Request) {
             fingerprint: session?.user.id as string,
         })
 
-        if(decision.isDenied()) {
+        if (decision.isDenied()) {
             return NextResponse.json(
-                {error: 'dude not good'},
-                {status: 429},
+                { error: 'dude not good' },
+                { status: 429 },
             )
         }
 
@@ -88,8 +86,8 @@ export async function POST(request: Request) {
 
     } catch {
         return NextResponse.json(
-            {error: 'Failed to generate presigned URL'}, 
-            {status: 500}
+            { error: 'Failed to generate presigned URL' },
+            { status: 500 }
         )
     }
 }

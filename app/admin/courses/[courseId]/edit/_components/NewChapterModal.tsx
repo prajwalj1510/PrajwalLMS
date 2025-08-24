@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { tryCatch } from "@/hooks/try-catch"
 import { chapterSchema, ChapterSchemaType } from "@/lib/zodSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { BookOpen, Loader, Loader2Icon, PlusIcon } from "lucide-react"
+import { BookOpen, Loader, PlusIcon } from "lucide-react"
 import { useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { CreateChapter } from "../actions"
@@ -44,7 +44,7 @@ export const NewChapterModal = ({ courseId }: { courseId: string }) => {
     }
 
     const handleOpenChange = (open: boolean) => {
-        if(!open) {
+        if (!open) {
             form.reset()
         }
         setIsOpen(open)

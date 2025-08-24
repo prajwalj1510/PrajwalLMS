@@ -18,7 +18,7 @@ const aj = arcjet.withRule(
     })
 )
 
-export const EnrollInCourseAction = async (courseId: string): Promise<ApiResponse | never> => {
+export const EnrollInCourseAction = async (courseId: string): Promise<ApiResponse> => {
 
     const user = await RequireUser()
 
@@ -100,7 +100,7 @@ export const EnrollInCourseAction = async (courseId: string): Promise<ApiRespons
                 where: {
                     userId_courseId: {
                         userId: user.id,
-                        courseId: course.id
+                        courseId: courseId
                     }
                 },
                 select: {

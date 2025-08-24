@@ -16,7 +16,6 @@ import { useForm } from "react-hook-form";
 import { updateLesson } from "../actions";
 import { tryCatch } from "@/hooks/try-catch";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 interface LessonFormProps {
     data: AdminLessonType;

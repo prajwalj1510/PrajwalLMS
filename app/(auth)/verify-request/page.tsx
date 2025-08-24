@@ -8,7 +8,13 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useState, useTransition } from "react"
 import { toast } from "sonner"
 
-export default function VerifyRequest() {
+export default function VerifyRequestRoute() {
+    return (
+        <VerifyRequest />
+    )
+}
+
+function VerifyRequest() {
 
     const router = useRouter()
 

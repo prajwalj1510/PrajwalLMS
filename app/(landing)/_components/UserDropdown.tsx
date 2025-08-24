@@ -1,13 +1,9 @@
 import {
-    BoltIcon,
     BookOpenIcon,
     ChevronDownIcon,
     HomeIcon,
-    Layers2Icon,
     LayoutDashboardIcon,
     LogOutIcon,
-    PinIcon,
-    UserPenIcon,
 } from "lucide-react"
 
 import {
@@ -26,9 +22,6 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
-import { authClient } from "@/lib/auth-client"
-import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 import { useSignOut } from "@/hooks/use-signout"
 
 interface iAppProps {

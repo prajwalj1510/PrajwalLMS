@@ -1,7 +1,7 @@
 import { type Editor } from "@tiptap/react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Toggle } from "@/components/ui/toggle";
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon, Bold, BoldIcon, Heading1Icon, Heading2Icon, Heading3Icon, ItalicIcon, ListIcon, ListOrderedIcon, RedoIcon, StrikethroughIcon, UndoIcon } from "lucide-react";
+import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, Heading1Icon, Heading2Icon, Heading3Icon, ItalicIcon, ListIcon, ListOrderedIcon, RedoIcon, StrikethroughIcon, UndoIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 
@@ -238,9 +238,9 @@ export const Menubar = ({ editor }: MenubarProps) => {
                 <div className="flex flex-wrap gap-1">
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button 
-                                size='sm' 
-                                variant='ghost' 
+                            <Button
+                                size='sm'
+                                variant='ghost'
                                 type="button"
                                 onClick={() => editor.chain().focus().undo().run()}
                                 disabled={!editor.can().undo()}
@@ -255,9 +255,9 @@ export const Menubar = ({ editor }: MenubarProps) => {
 
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button 
-                                size='sm' 
-                                variant='ghost' 
+                            <Button
+                                size='sm'
+                                variant='ghost'
                                 type="button"
                                 onClick={() => editor.chain().focus().redo().run()}
                                 disabled={!editor.can().redo()}
