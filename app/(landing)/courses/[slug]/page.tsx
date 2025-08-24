@@ -5,7 +5,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
-import { useConstructUrl } from "@/hooks/use-construct-url";
 import { IconBook, IconCategory, IconChartBar, IconClock, IconPlayerPlay } from "@tabler/icons-react";
 import { CheckIcon, ChevronDown } from "lucide-react";
 import Image from "next/image";
